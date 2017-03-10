@@ -1,2 +1,2 @@
 ---
-expected_fs_size: 20000000000
+cloudinit_expected_fs_size: 20000000000

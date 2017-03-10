@@ -9,4 +9,4 @@
   assert:
     that: >
       (fs_size.stdout.split()[0]|int * fs_size.stdout.split()[1]|int) >
-      expected_fs_size
+      cloudinit_expected_fs_size
