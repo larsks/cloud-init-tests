@@ -1,0 +1,10 @@
+---
+- name: check for boot-finished file
+  stat:
+    path: "{{ cloudinit_boot_finished_path }}"
+  register: boot_finished
+
+- name: "[test] verify cloud-init finished successfully"
+  assert:
+    that: boot_finished.stat.exists and boot_finished.stat.isreg
+    msg: "expected {{ cloudinit_boot_finished_path }} to exist but it does not"

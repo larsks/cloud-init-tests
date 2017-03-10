@@ -1,0 +1,2 @@
+---
+cloudinit_boot_finished_path: /var/lib/cloud/instance/boot-finished
