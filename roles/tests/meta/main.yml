@@ -1,7 +1,0 @@
----
-dependencies:
-  - tests/verify_system_running
-  - tests/verify_no_ordering_cycle
-  - tests/verify_userdata
-  - tests/verify_root_fs_size
-  - tests/verify_hostname

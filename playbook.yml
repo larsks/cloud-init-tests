@@ -4,4 +4,4 @@
     - tests
   hosts: cloudinit
   roles:
-    - tests
+    - test
