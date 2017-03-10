@@ -1,0 +1,12 @@
+---
+- name: get size of root filesystem
+  command: >
+    stat -f -c '%b %S' /
+  register: fs_size
+  changed_when: false
+
+- name: "[test] verify that root filesystem grew as expected"
+  assert:
+    that: >
+      (fs_size.stdout.split()[0]|int * fs_size.stdout.split()[1]|int) >
+      expected_fs_size

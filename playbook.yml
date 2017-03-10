@@ -1,0 +1,7 @@
+---
+- name: run tests
+  tags:
+    - tests
+  hosts: cloudinit
+  roles:
+    - tests

@@ -1,0 +1,28 @@
+---
+
+# These tests are meant to verify the successful execution of tasks
+# provided to cloud-init via the userdata blob, such as creating
+# files, groups, users, etc.
+
+- name: check that expected files exist
+  stat:
+    path: "{{ item }}"
+    follow: false
+  with_items: "{{ cloudinit_expected_files }}"
+  register: expected_file_check
+
+- name: "[test] verify that expected files exist"
+  assert:
+    that: >
+      item.stat.exists and item.stat.isreg
+  with_items: "{{ expected_file_check.results }}"
+
+- name: "[test] verify that expected groups exist"
+  command: "getent group {{ item }}"
+  changed_when: false
+  with_items: "{{ cloudinit_expected_groups }}"
+
+- name: "[test] verify that expected users exist"
+  command: "getent passwd {{ item }}"
+  changed_when: false
+  with_items: "{{ cloudinit_expected_users }}"

@@ -1,0 +1,10 @@
+---
+- name: check if this host uses systemd
+  stat:
+    path: "{{ systemd_run_path }}/system"
+    follow: false
+  register: st
+
+- name: set flag_systemd fact
+  set_fact:
+    flag_systemd: "{{ st.stat.exists and st.stat.isdir }}"

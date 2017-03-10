@@ -1,0 +1,16 @@
+---
+- when: flag_systemd
+  block:
+
+    - name: read systemd status
+      command: >
+        systemctl is-system-running
+      register: is_system_running
+      until: is_system_running.stdout in ["running", "degraded"]
+      retries: 10
+      delay: 5
+      changed_when: false
+
+    - name: "[test] verify that system booted cleanly"
+      assert:
+        that: is_system_running.stdout == "running"

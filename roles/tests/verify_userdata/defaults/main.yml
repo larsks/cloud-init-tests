@@ -1,0 +1,4 @@
+---
+cloudinit_expected_files: []
+cloudinit_expected_groups: []
+cloudinit_expected_users: []

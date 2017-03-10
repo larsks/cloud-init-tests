@@ -1,0 +1,14 @@
+---
+- when: flag_systemd
+  block:
+
+    - name: collect journald output
+      command: >
+        journalctl -u multi-user.target -b
+      register: ordering_cycle_check
+      changed_when: false
+
+    - name: "[test] verify that systemd found no ordering cycles"
+      assert:
+        that: >
+          'found ordering cycle' not in ordering_cycle_check.stdout

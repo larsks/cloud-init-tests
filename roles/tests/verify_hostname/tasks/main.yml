@@ -1,0 +1,4 @@
+---
+- name: "[test] verify system hostname"
+  assert:
+    that: ansible_hostname == inventory_hostname
