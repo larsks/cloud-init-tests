@@ -1,7 +1,20 @@
 ---
 dependencies:
-  - test/verify_system_running
-  - test/verify_no_ordering_cycle
-  - test/verify_userdata
-  - test/verify_root_fs_size
-  - test/verify_hostname
+  - role: test/verify_system_running
+    tags:
+      - verify_system_running
+      - systemd
+  - role: test/verify_no_ordering_cycle
+    tags:
+      - verify_no_ordering_cycle
+      - systemd
+  - role: test/verify_userdata
+    tags:
+      - verify_userdata
+      - userdata
+  - role: test/verify_root_fs_size
+    tags:
+      - verify_root_fs_size
+  - role: test/verify_hostname
+    tags:
+      - verify_hostname
