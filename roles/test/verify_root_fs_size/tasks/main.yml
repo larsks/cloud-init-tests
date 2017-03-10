@@ -1,12 +1,21 @@
 ---
-- name: get size of root filesystem
+- name: get root filesystem information
   command: >
     stat -f -c '%b %S' /
-  register: fs_size
+  register: st
   changed_when: false
+
+- name: calculate size of root filesystem
+  set_fact:
+    root_fs_size: >-
+      {{
+      (st.stdout.split()[0]|int * st.stdout.split()[1]|int)
+      }}
 
 - name: "[test] verify that root filesystem grew as expected"
   assert:
     that: >
-      (fs_size.stdout.split()[0]|int * fs_size.stdout.split()[1]|int) >
-      cloudinit_expected_fs_size
+      root_fs_size >= cloudinit_expected_fs_size
+    msg: >
+      root fs size is {{ root_fs_size }}, expected at
+      least {{ cloudinit_expected_fs_size }}

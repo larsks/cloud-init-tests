@@ -15,6 +15,7 @@
   assert:
     that: >
       item.stat.exists and item.stat.isreg
+    msg: "expected {{ item.item }} to be a regular file but it is not"
   with_items: "{{ expected_file_check.results }}"
 
 - name: "[test] verify that expected groups exist"

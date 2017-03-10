@@ -11,6 +11,12 @@
       delay: 5
       changed_when: false
 
+    - name: set system_run_status fact
+      set_fact:
+        system_run_status: "{{ is_system_running.stdout }}"
+
     - name: "[test] verify that system booted cleanly"
       assert:
-        that: is_system_running.stdout == "running"
+        that: system_run_status == "running"
+        msg: >
+          expected status "running", found "{{ system_run_status }}"

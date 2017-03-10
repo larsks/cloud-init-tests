@@ -2,3 +2,4 @@
 - name: "[test] verify system hostname"
   assert:
     that: ansible_hostname == inventory_hostname
+    msg: "hostname is {{ ansible_hostname }}, expected {{ inventory_hostname }}"
