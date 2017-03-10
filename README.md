@@ -3,6 +3,17 @@ correctly.  Create an Ansible inventory with a `cloudinit` group
 containing any hosts you wish to validate, and then run the included
 `playbook.yml` against that inventory.
 
+The playbook simply includes the `test` role, which then includes all
+the tests as dependencies (see [roles/tests/meta/main.yml][tests]).
+Each test is tagged with the test name, so for example if you only
+want to run the `verify_hostname` test you can run:
+
+[tests]: roles/test/meta/main.yml
+
+    ansible-playbook playbook.yml -i hosts -t verify_hostname
+
+Similarly, you can skip specific tests using `--skip-tags`
+
 ## Configuration
 
 ### verify_root_fs_size
